@@ -1,0 +1,12 @@
+body {
+    color: #eee;
+    font-family: 'Lato', sans-serif;
+    font-size: 62.5%;
+    background-image:url('../../../assets/74.jpg') ;
+    background-size: 100%;
+    position :fixed;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size:cover;
+    }

@@ -1,0 +1,65 @@
+
+<!-- <div class="container mt-5"> -->
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="bg-white">
+                <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation"> <button class="nav-link active" id="faq_tab_1-tab"
+                            data-bs-toggle="tab" data-bs-target="#faq_tab_1" type="button" role="tab"
+                            aria-controls="faq_tab_1" aria-selected="true">
+                            <div class="d-flex flex-column lh-lg"> <i class='bx bxs-plane-alt'></i> <span>Package</span>
+                            </div>
+                        </button> </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade active show" id="faq_tab_1" role="tabpanel"
+                        aria-labelledby="faq_tab_1-tab">
+                        <div class="container p-3">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" list="countries1" #countryFrom
+                                    name="browserCountry" id="browserCountry" placeholder="Country From"
+                                    (change)="checkCountryTo(countryFrom.value)">
+                                <datalist id="countries1">
+                                    <option *ngFor="let co of countryFromArray" #countryFrom>{{co.countryDisplayName}}
+                                    </option>
+                                </datalist>
+                                <input type="text" class="form-control" list="countries2" #countryTo
+                                    name="browserCountry1" id="browserCountry1" placeholder="Country To"
+                                    (change)="checkCountryFrom(countryTo.value)">
+                                <datalist id="countries2">
+                                    <option *ngFor="let co of countryToArray" #countryTo>{{co.countryDisplayName}}
+                                    </option>
+                                </datalist>
+                                <input class="form-control" type="text" list="cities" #city name="city"
+                                    id="city" placeholder="City" />
+                                <datalist id="cities">
+                                    <option *ngFor="let c of destCityList" #city>{{c.name}}</option>
+                                </datalist>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="date" class="form-control" placeholder="Depart" #departDate>
+                                <input type="date" class="form-control" placeholder="Return" #returnDate>
+                            </div>
+                            <div class="input-group mb-3"> <select class="form-select form-control"
+                                    id="inputGroupSelect02" aria-placeholder="Passenger" #passengers>
+                                    <option *ngFor="let p of passengerArr" #passengers>{{p}}</option>
+                                </select> <select class="form-select form-control" id="inputGroupSelect02"
+                                    aria-placeholder="Sort By" #sortBy>
+                                    <option *ngFor="let s of sortByArr">{{s}}</option>
+
+
+                                </select> </div>
+                            <div class="mt-4 d-flex justify-content-end">
+                                <button class="btn btn-success custom-button px-5"
+                                    (click)="searchPackage(countryFrom.value,countryTo.value,city.value,departDate.value,returnDate.value,passengers.value,sortBy.value)">Search
+                                    Package</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </div> -->
+

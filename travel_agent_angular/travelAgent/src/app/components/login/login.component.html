@@ -1,0 +1,64 @@
+
+	<body>
+
+<form>
+<div class="login-wrap"  >
+	<div class="login-html">
+		<input id="tab-1" type="radio" name="tab"  class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
+		<input id="tab-2" type="radio" name="tab"  class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+				<div class="group">
+					<label for="user" class="label">Username</label>
+					<input id="user" #user type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" #password type="password" class="input" data-type="password">
+				</div>
+				<div class="group">
+					<input id="check" type="checkbox" class="check" checked>
+					<label for="check"><span class="icon"></span> Keep me Signed in</label>
+				</div>
+				<div class="group">
+					<input type="submit" (click)="connection(user.value, password.value)" class="button"  value="Sign In" >
+				
+				</div>
+				<div class="hr"></div>
+			</div>
+			<div class="sign-up-htm">
+				<div class="group">
+					<label for="tzRegister" class="label">Id</label>
+					<input id="tzRegister" #tzRegister type="text" class="input">
+				</div>
+				<div class="group">
+					<label for="firstNameRegister" class="label">First Name</label>
+					<input id="firstNameRegister" #firstNameRegister type="text" class="input" required>
+				</div>
+				<div class="group">
+					<label for="lastName" class="label">Last Name</label>
+					<input id="lastName" #lastNameRegister type="text" class="input" required>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Password</label>
+					<input id="pass" type="password" #passwordRegister class="input" data-type="password" required>
+					<!-- <a href="https://www.flaticon.com/free-icons/eye" title="eye icons">Eye icons created by Freepik - Flaticon</a> -->
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Repeat Password</label>
+					<input id="pass" type="password" #repeatPassword class="input" data-type="password" required>
+				</div>
+				<div class="group">
+					<label for="pass" class="label">Email Address</label>
+					<input id="pass" type="text" #emailRegister class="input" required>
+				</div>
+				<div class="group">
+					<input type="submit"  class="button"  value="Sign Up" (click)="isRegistered(tzRegister.value,firstNameRegister.value,lastNameRegister.value,passwordRegister.value,repeatPassword.value,emailRegister.value)">
+				</div>                                                                                             
+				<div class="hr"></div>
+			</div>
+		</div>
+	</div>
+</div>
+  </form>
+</body>

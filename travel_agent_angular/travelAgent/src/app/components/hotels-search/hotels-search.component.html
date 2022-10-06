@@ -1,0 +1,90 @@
+<!-- <div id="booking" class="section"> -->
+    <!-- <div class="section-center"> -->
+        <!-- <div class="container"> -->
+            <!-- <div class="row"> -->
+                <div class="booking-form">
+                    <div class="form-header">
+                        <h1>Make your reservation</h1>
+                    </div>
+                    <form>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" list="countries" #Country
+                                        name="browserCountry" id="browserCountry" placeholder="Country"
+                                        (change)="onSelectCountry(Country.value)">
+                                    <datalist id="countries">
+                                        <option *ngFor="let co of arrCountries" #Country>{{co.countryDisplayName}}
+                                        </option>
+                                    </datalist>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" list="browsers" #City name="browser"
+                                        id="browser" placeholder="City" />
+                                    <datalist id="browsers">
+                                        <option *ngFor="let c of destCityList" #City>{{c.name}}</option>
+                                    </datalist>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input class="form-control" type="date" required #CheckIn>
+                                    <span class="form-label">Check In</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"> <input class="form-control" type="date" required #CheckOut>
+                                    <span class="form-label">Check out</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group"> <select class="form-control" required #NumberRooms>
+                                        <option *ngFor="let n of numbers" #NumberRooms >{{n}}</option>
+                                    </select> <span class="select-arrow"></span> <span class="form-label">Rooms</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group"> <select class="form-control" required #NumberAdults>
+                                        <option *ngFor="let n of numbers" #NumberAdults>{{n}}</option>
+                                    </select> <span class="select-arrow"></span> <span class="form-label">Adults</span>
+                                </div>
+                            </div>
+                            <span class="form-label">Number Children</span>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <select class="form-control" required #NumberChildren>
+
+                                        <option #NumberChildren *ngFor="let n of numbers">{{n}}</option>
+                                    </select>
+                                    <span class="select-arrow"> </span>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group"> <input class="form-control" type="email" #Email
+                                        placeholder="Enter your Email"> <span class="form-label">Email</span> </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"> <input class="form-control" type="tel" #Phone
+                                        placeholder="Enter you Phone"> <span class="form-label">Phone</span> </div>
+                            </div>
+                        </div>
+                        <div class="form-btn"> <button class="submit-btn"
+                                (click)="bookNow(Country.value,City.value,CheckIn.value,CheckOut.value,NumberRooms.value,NumberAdults.value,NumberChildren.value,Email.value,Phone.value)">Book
+                                Now</button> </div>
+                    </form>
+                </div>
+            <!-- </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
+ <!-- </div> -->

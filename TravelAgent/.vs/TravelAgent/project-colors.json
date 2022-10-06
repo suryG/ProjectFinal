@@ -1,0 +1,31 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "b4780c5e-c50a-4927-9829-82186667c432": {
+      "ProjectGuid": "b4780c5e-c50a-4927-9829-82186667c432",
+      "DisplayName": "DTO",
+      "ColorIndex": 0
+    },
+    "462d7dc8-473f-4d3a-9efc-0326530381ae": {
+      "ProjectGuid": "462d7dc8-473f-4d3a-9efc-0326530381ae",
+      "DisplayName": "webApi",
+      "ColorIndex": 1
+    },
+    "09c0b79d-4457-46aa-8982-1fc437ba5d99": {
+      "ProjectGuid": "09c0b79d-4457-46aa-8982-1fc437ba5d99",
+      "DisplayName": "DAL",
+      "ColorIndex": 2
+    },
+    "6400aa6a-d87f-4b9b-bbce-6d053dc04dd8": {
+      "ProjectGuid": "6400aa6a-d87f-4b9b-bbce-6d053dc04dd8",
+      "DisplayName": "BLL",
+      "ColorIndex": 3
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 4
+}

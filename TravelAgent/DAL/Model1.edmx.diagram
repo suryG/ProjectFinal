@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ebeefe3195144c769404111a5cf82e73" Name="Diagram1">
+        <EntityTypeShape EntityType="travel_agentModel.flights" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_agentModel.holiday_package" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_agentModel.hotels" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_agentModel.room_in_hotel" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_agentModel.users" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_agentModel.country" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="travel_agentModel.FK__holiday_p__fligh__2F10007B" ManuallyRouted="false" />
+        <AssociationConnector Association="travel_agentModel.FK__holiday_p__fligh__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="travel_agentModel.FK__holiday_p__hotel__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="travel_agentModel.FK__holiday_p__user___2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="travel_agentModel.FK__room_in_h__hotel__286302EC" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

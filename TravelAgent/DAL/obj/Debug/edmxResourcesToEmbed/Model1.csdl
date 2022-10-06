@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="travel_agentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="flights">
+    <Key>
+      <PropertyRef Name="flight_code" />
+    </Key>
+    <Property Name="flight_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="flight_company" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="flight_date" Type="DateTime" Precision="0" />
+    <Property Name="flight_country_of_origin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="flight_destination_country" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="holiday_package" Relationship="Self.FK__holiday_p__fligh__2F10007B" FromRole="flights" ToRole="holiday_package" />
+    <NavigationProperty Name="holiday_package1" Relationship="Self.FK__holiday_p__fligh__300424B4" FromRole="flights" ToRole="holiday_package" />
+  </EntityType>
+  <EntityType Name="holiday_package">
+    <Key>
+      <PropertyRef Name="package_code" />
+    </Key>
+    <Property Name="package_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_tz" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="hotel_code" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="flight_enter_code" Type="Int32" />
+    <Property Name="flight_back_code" Type="Int32" />
+    <NavigationProperty Name="flights" Relationship="Self.FK__holiday_p__fligh__2F10007B" FromRole="holiday_package" ToRole="flights" />
+    <NavigationProperty Name="flights1" Relationship="Self.FK__holiday_p__fligh__300424B4" FromRole="holiday_package" ToRole="flights" />
+    <NavigationProperty Name="hotels" Relationship="Self.FK__holiday_p__hotel__2E1BDC42" FromRole="holiday_package" ToRole="hotels" />
+    <NavigationProperty Name="users" Relationship="Self.FK__holiday_p__user___2D27B809" FromRole="holiday_package" ToRole="users" />
+  </EntityType>
+  <EntityType Name="hotels">
+    <Key>
+      <PropertyRef Name="hotel_code" />
+    </Key>
+    <Property Name="hotel_code" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="hotel_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="hotel_country" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="hotel_city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="hotel_address" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="hotel_number" Type="Int32" />
+    <Property Name="number_of_stars" Type="Int32" />
+    <NavigationProperty Name="holiday_package" Relationship="Self.FK__holiday_p__hotel__2E1BDC42" FromRole="hotels" ToRole="holiday_package" />
+    <NavigationProperty Name="room_in_hotel" Relationship="Self.FK__room_in_h__hotel__286302EC" FromRole="hotels" ToRole="room_in_hotel" />
+  </EntityType>
+  <EntityType Name="room_in_hotel">
+    <Key>
+      <PropertyRef Name="room_number" />
+    </Key>
+    <Property Name="room_number" Type="Int32" Nullable="false" />
+    <Property Name="hotel_code" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+    <Property Name="number_of_beds" Type="Int32" />
+    <Property Name="room_price" Type="Int32" />
+    <NavigationProperty Name="hotels" Relationship="Self.FK__room_in_h__hotel__286302EC" FromRole="room_in_hotel" ToRole="hotels" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="user_tz" />
+    </Key>
+    <Property Name="user_tz" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pasword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="holiday_package" Relationship="Self.FK__holiday_p__user___2D27B809" FromRole="users" ToRole="holiday_package" />
+  </EntityType>
+  <EntityType Name="country">
+    <Key>
+      <PropertyRef Name="countryId" />
+      <PropertyRef Name="countryKey" />
+      <PropertyRef Name="countryDisplayName" />
+    </Key>
+    <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryKey" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="countryDisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__holiday_p__fligh__2F10007B">
+    <End Role="flights" Type="Self.flights" Multiplicity="0..1" />
+    <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="flights">
+        <PropertyRef Name="flight_code" />
+      </Principal>
+      <Dependent Role="holiday_package">
+        <PropertyRef Name="flight_enter_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__holiday_p__fligh__300424B4">
+    <End Role="flights" Type="Self.flights" Multiplicity="0..1" />
+    <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="flights">
+        <PropertyRef Name="flight_code" />
+      </Principal>
+      <Dependent Role="holiday_package">
+        <PropertyRef Name="flight_back_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__holiday_p__hotel__2E1BDC42">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="0..1" />
+    <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="hotel_code" />
+      </Principal>
+      <Dependent Role="holiday_package">
+        <PropertyRef Name="hotel_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__holiday_p__user___2D27B809">
+    <End Role="users" Type="Self.users" Multiplicity="0..1" />
+    <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="user_tz" />
+      </Principal>
+      <Dependent Role="holiday_package">
+        <PropertyRef Name="user_tz" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__room_in_h__hotel__286302EC">
+    <End Role="hotels" Type="Self.hotels" Multiplicity="0..1" />
+    <End Role="room_in_hotel" Type="Self.room_in_hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotels">
+        <PropertyRef Name="hotel_code" />
+      </Principal>
+      <Dependent Role="room_in_hotel">
+        <PropertyRef Name="hotel_code" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="travel_agentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="flights" EntityType="Self.flights" />
+    <EntitySet Name="holiday_package" EntityType="Self.holiday_package" />
+    <EntitySet Name="hotels" EntityType="Self.hotels" />
+    <EntitySet Name="room_in_hotel" EntityType="Self.room_in_hotel" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <EntitySet Name="country" EntityType="Self.country" />
+    <AssociationSet Name="FK__holiday_p__fligh__2F10007B" Association="Self.FK__holiday_p__fligh__2F10007B">
+      <End Role="flights" EntitySet="flights" />
+      <End Role="holiday_package" EntitySet="holiday_package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__holiday_p__fligh__300424B4" Association="Self.FK__holiday_p__fligh__300424B4">
+      <End Role="flights" EntitySet="flights" />
+      <End Role="holiday_package" EntitySet="holiday_package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__holiday_p__hotel__2E1BDC42" Association="Self.FK__holiday_p__hotel__2E1BDC42">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="holiday_package" EntitySet="holiday_package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__holiday_p__user___2D27B809" Association="Self.FK__holiday_p__user___2D27B809">
+      <End Role="users" EntitySet="users" />
+      <End Role="holiday_package" EntitySet="holiday_package" />
+    </AssociationSet>
+    <AssociationSet Name="FK__room_in_h__hotel__286302EC" Association="Self.FK__room_in_h__hotel__286302EC">
+      <End Role="hotels" EntitySet="hotels" />
+      <End Role="room_in_hotel" EntitySet="room_in_hotel" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

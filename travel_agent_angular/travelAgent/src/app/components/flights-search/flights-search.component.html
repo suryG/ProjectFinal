@@ -1,0 +1,42 @@
+
+<main>
+  <section>
+    <div class="tabs">
+      <div class="tab1"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/185649/plane-icon.png" alt=""></div>
+      <div class="tab2">
+        <h1>Search Flight</h1>
+      </div>
+      <div class="tab3"></div>
+    </div>
+    <div class="line1">
+      <input type="text" list="browsers" name="browser" id="browser" class="box1" #Depart placeholder="Depart"
+        (change)="checkCountryTo(Depart.value)" />
+      <datalist id="browsers">
+        <option *ngFor="let c of countryFromArray" #Depart>{{c.countryDisplayName}}</option>
+      </datalist>
+      <input type="text" list="browsers1" name="browser1" id="browser1" class="box2" #Arrive placeholder="Arrive"
+        (change)="checkCountryFrom(Arrive.value)" />
+      <datalist id="browsers1">
+        <option *ngFor="let c of countryToArray" #Arrive>{{c.countryDisplayName}}</option>
+      </datalist>
+    </div>
+    <div class="line2">
+      <input type="date" class="box3" #DepartDate placeholder="mm/dd/yyyy" />
+      <input type="date" class="box4" #ArriveDate placeholder="mm/dd/yyyy" />
+    </div>
+    <div class="line3">
+      <div class="passenger">
+        <h5>Passenger</h5>
+      </div>
+      <input type="number" #adults class="number" min="1">
+
+      <div class="arrow-down"></div>
+
+      <div class="return"><input type="radio" name="return" value="return-flight" #ifreturn checked>Return</div>
+      <div class="one-way"><input type="radio" name="return" value="no return">One Way</div>
+    </div>
+    <div class="search-flights"
+      (click)="search(Depart.value,Arrive.value,DepartDate.value,adults.value,ArriveDate.value,ifreturn.checked)">Search
+      Flights</div>
+  </section>
+</main>

@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="travel_agentModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'travel_agent.dbo.country' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="countryId" />
+            <PropertyRef Name="countryKey" />
+            <PropertyRef Name="countryDisplayName" />
+          </Key>
+          <Property Name="countryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="countryKey" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="countryDisplayName" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="flights">
+          <Key>
+            <PropertyRef Name="flight_code" />
+          </Key>
+          <Property Name="flight_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="flight_company" Type="nvarchar" MaxLength="10" />
+          <Property Name="flight_date" Type="date" />
+          <Property Name="flight_country_of_origin" Type="nvarchar" MaxLength="10" />
+          <Property Name="flight_destination_country" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="holiday_package">
+          <Key>
+            <PropertyRef Name="package_code" />
+          </Key>
+          <Property Name="package_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_tz" Type="nvarchar" MaxLength="9" />
+          <Property Name="hotel_code" Type="nvarchar" MaxLength="9" />
+          <Property Name="flight_enter_code" Type="int" />
+          <Property Name="flight_back_code" Type="int" />
+        </EntityType>
+        <EntityType Name="hotels">
+          <Key>
+            <PropertyRef Name="hotel_code" />
+          </Key>
+          <Property Name="hotel_code" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="hotel_name" Type="nvarchar" MaxLength="10" />
+          <Property Name="hotel_country" Type="nvarchar" MaxLength="10" />
+          <Property Name="hotel_city" Type="nvarchar" MaxLength="10" />
+          <Property Name="hotel_address" Type="nvarchar" MaxLength="10" />
+          <Property Name="hotel_number" Type="int" />
+          <Property Name="number_of_stars" Type="int" />
+        </EntityType>
+        <EntityType Name="room_in_hotel">
+          <Key>
+            <PropertyRef Name="room_number" />
+          </Key>
+          <Property Name="room_number" Type="int" Nullable="false" />
+          <Property Name="hotel_code" Type="nvarchar" MaxLength="9" />
+          <Property Name="number_of_beds" Type="int" />
+          <Property Name="room_price" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_tz" />
+          </Key>
+          <Property Name="user_tz" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="pasword" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__holiday_p__fligh__2F10007B">
+          <End Role="flights" Type="Self.flights" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flights">
+              <PropertyRef Name="flight_code" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="flight_enter_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__holiday_p__fligh__300424B4">
+          <End Role="flights" Type="Self.flights" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flights">
+              <PropertyRef Name="flight_code" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="flight_back_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__holiday_p__hotel__2E1BDC42">
+          <End Role="hotels" Type="Self.hotels" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotels">
+              <PropertyRef Name="hotel_code" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="hotel_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__holiday_p__user___2D27B809">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_tz" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="user_tz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_in_h__hotel__286302EC">
+          <End Role="hotels" Type="Self.hotels" Multiplicity="0..1" />
+          <End Role="room_in_hotel" Type="Self.room_in_hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotels">
+              <PropertyRef Name="hotel_code" />
+            </Principal>
+            <Dependent Role="room_in_hotel">
+              <PropertyRef Name="hotel_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="travel_agentModelStoreContainer">
+          <EntitySet Name="flights" EntityType="Self.flights" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="holiday_package" EntityType="Self.holiday_package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hotels" EntityType="Self.hotels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="room_in_hotel" EntityType="Self.room_in_hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="country" EntityType="Self.country" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [country].[countryId] AS [countryId], 
+    [country].[countryKey] AS [countryKey], 
+    [country].[countryDisplayName] AS [countryDisplayName]
+    FROM [dbo].[country] AS [country]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__holiday_p__fligh__2F10007B" Association="Self.FK__holiday_p__fligh__2F10007B">
+            <End Role="flights" EntitySet="flights" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__holiday_p__fligh__300424B4" Association="Self.FK__holiday_p__fligh__300424B4">
+            <End Role="flights" EntitySet="flights" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__holiday_p__hotel__2E1BDC42" Association="Self.FK__holiday_p__hotel__2E1BDC42">
+            <End Role="hotels" EntitySet="hotels" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__holiday_p__user___2D27B809" Association="Self.FK__holiday_p__user___2D27B809">
+            <End Role="users" EntitySet="users" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_in_h__hotel__286302EC" Association="Self.FK__room_in_h__hotel__286302EC">
+            <End Role="hotels" EntitySet="hotels" />
+            <End Role="room_in_hotel" EntitySet="room_in_hotel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="travel_agentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="flights">
+          <Key>
+            <PropertyRef Name="flight_code" />
+          </Key>
+          <Property Name="flight_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="flight_company" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="flight_date" Type="DateTime" Precision="0" />
+          <Property Name="flight_country_of_origin" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="flight_destination_country" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="holiday_package" Relationship="Self.FK__holiday_p__fligh__2F10007B" FromRole="flights" ToRole="holiday_package" />
+          <NavigationProperty Name="holiday_package1" Relationship="Self.FK__holiday_p__fligh__300424B4" FromRole="flights" ToRole="holiday_package" />
+        </EntityType>
+        <EntityType Name="holiday_package">
+          <Key>
+            <PropertyRef Name="package_code" />
+          </Key>
+          <Property Name="package_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_tz" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="hotel_code" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="flight_enter_code" Type="Int32" />
+          <Property Name="flight_back_code" Type="Int32" />
+          <NavigationProperty Name="flights" Relationship="Self.FK__holiday_p__fligh__2F10007B" FromRole="holiday_package" ToRole="flights" />
+          <NavigationProperty Name="flights1" Relationship="Self.FK__holiday_p__fligh__300424B4" FromRole="holiday_package" ToRole="flights" />
+          <NavigationProperty Name="hotels" Relationship="Self.FK__holiday_p__hotel__2E1BDC42" FromRole="holiday_package" ToRole="hotels" />
+          <NavigationProperty Name="users" Relationship="Self.FK__holiday_p__user___2D27B809" FromRole="holiday_package" ToRole="users" />
+        </EntityType>
+        <EntityType Name="hotels">
+          <Key>
+            <PropertyRef Name="hotel_code" />
+          </Key>
+          <Property Name="hotel_code" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hotel_name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hotel_country" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hotel_city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hotel_address" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hotel_number" Type="Int32" />
+          <Property Name="number_of_stars" Type="Int32" />
+          <NavigationProperty Name="holiday_package" Relationship="Self.FK__holiday_p__hotel__2E1BDC42" FromRole="hotels" ToRole="holiday_package" />
+          <NavigationProperty Name="room_in_hotel" Relationship="Self.FK__room_in_h__hotel__286302EC" FromRole="hotels" ToRole="room_in_hotel" />
+        </EntityType>
+        <EntityType Name="room_in_hotel">
+          <Key>
+            <PropertyRef Name="room_number" />
+          </Key>
+          <Property Name="room_number" Type="Int32" Nullable="false" />
+          <Property Name="hotel_code" Type="String" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="number_of_beds" Type="Int32" />
+          <Property Name="room_price" Type="Int32" />
+          <NavigationProperty Name="hotels" Relationship="Self.FK__room_in_h__hotel__286302EC" FromRole="room_in_hotel" ToRole="hotels" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="user_tz" />
+          </Key>
+          <Property Name="user_tz" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pasword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="holiday_package" Relationship="Self.FK__holiday_p__user___2D27B809" FromRole="users" ToRole="holiday_package" />
+        </EntityType>
+        <EntityType Name="country">
+          <Key>
+            <PropertyRef Name="countryId" />
+            <PropertyRef Name="countryKey" />
+            <PropertyRef Name="countryDisplayName" />
+          </Key>
+          <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="countryKey" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="countryDisplayName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__holiday_p__fligh__2F10007B">
+          <End Role="flights" Type="Self.flights" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flights">
+              <PropertyRef Name="flight_code" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="flight_enter_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__holiday_p__fligh__300424B4">
+          <End Role="flights" Type="Self.flights" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="flights">
+              <PropertyRef Name="flight_code" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="flight_back_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__holiday_p__hotel__2E1BDC42">
+          <End Role="hotels" Type="Self.hotels" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotels">
+              <PropertyRef Name="hotel_code" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="hotel_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__holiday_p__user___2D27B809">
+          <End Role="users" Type="Self.users" Multiplicity="0..1" />
+          <End Role="holiday_package" Type="Self.holiday_package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="user_tz" />
+            </Principal>
+            <Dependent Role="holiday_package">
+              <PropertyRef Name="user_tz" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__room_in_h__hotel__286302EC">
+          <End Role="hotels" Type="Self.hotels" Multiplicity="0..1" />
+          <End Role="room_in_hotel" Type="Self.room_in_hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="hotels">
+              <PropertyRef Name="hotel_code" />
+            </Principal>
+            <Dependent Role="room_in_hotel">
+              <PropertyRef Name="hotel_code" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="travel_agentEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="flights" EntityType="Self.flights" />
+          <EntitySet Name="holiday_package" EntityType="Self.holiday_package" />
+          <EntitySet Name="hotels" EntityType="Self.hotels" />
+          <EntitySet Name="room_in_hotel" EntityType="Self.room_in_hotel" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="country" EntityType="Self.country" />
+          <AssociationSet Name="FK__holiday_p__fligh__2F10007B" Association="Self.FK__holiday_p__fligh__2F10007B">
+            <End Role="flights" EntitySet="flights" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__holiday_p__fligh__300424B4" Association="Self.FK__holiday_p__fligh__300424B4">
+            <End Role="flights" EntitySet="flights" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__holiday_p__hotel__2E1BDC42" Association="Self.FK__holiday_p__hotel__2E1BDC42">
+            <End Role="hotels" EntitySet="hotels" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__holiday_p__user___2D27B809" Association="Self.FK__holiday_p__user___2D27B809">
+            <End Role="users" EntitySet="users" />
+            <End Role="holiday_package" EntitySet="holiday_package" />
+          </AssociationSet>
+          <AssociationSet Name="FK__room_in_h__hotel__286302EC" Association="Self.FK__room_in_h__hotel__286302EC">
+            <End Role="hotels" EntitySet="hotels" />
+            <End Role="room_in_hotel" EntitySet="room_in_hotel" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="travel_agentModelStoreContainer" CdmEntityContainer="travel_agentEntities">
+          <EntitySetMapping Name="flights">
+            <EntityTypeMapping TypeName="travel_agentModel.flights">
+              <MappingFragment StoreEntitySet="flights">
+                <ScalarProperty Name="flight_code" ColumnName="flight_code" />
+                <ScalarProperty Name="flight_company" ColumnName="flight_company" />
+                <ScalarProperty Name="flight_date" ColumnName="flight_date" />
+                <ScalarProperty Name="flight_country_of_origin" ColumnName="flight_country_of_origin" />
+                <ScalarProperty Name="flight_destination_country" ColumnName="flight_destination_country" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="holiday_package">
+            <EntityTypeMapping TypeName="travel_agentModel.holiday_package">
+              <MappingFragment StoreEntitySet="holiday_package">
+                <ScalarProperty Name="package_code" ColumnName="package_code" />
+                <ScalarProperty Name="user_tz" ColumnName="user_tz" />
+                <ScalarProperty Name="hotel_code" ColumnName="hotel_code" />
+                <ScalarProperty Name="flight_enter_code" ColumnName="flight_enter_code" />
+                <ScalarProperty Name="flight_back_code" ColumnName="flight_back_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hotels">
+            <EntityTypeMapping TypeName="travel_agentModel.hotels">
+              <MappingFragment StoreEntitySet="hotels">
+                <ScalarProperty Name="hotel_code" ColumnName="hotel_code" />
+                <ScalarProperty Name="hotel_name" ColumnName="hotel_name" />
+                <ScalarProperty Name="hotel_country" ColumnName="hotel_country" />
+                <ScalarProperty Name="hotel_city" ColumnName="hotel_city" />
+                <ScalarProperty Name="hotel_address" ColumnName="hotel_address" />
+                <ScalarProperty Name="hotel_number" ColumnName="hotel_number" />
+                <ScalarProperty Name="number_of_stars" ColumnName="number_of_stars" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="room_in_hotel">
+            <EntityTypeMapping TypeName="travel_agentModel.room_in_hotel">
+              <MappingFragment StoreEntitySet="room_in_hotel">
+                <ScalarProperty Name="room_number" ColumnName="room_number" />
+                <ScalarProperty Name="hotel_code" ColumnName="hotel_code" />
+                <ScalarProperty Name="number_of_beds" ColumnName="number_of_beds" />
+                <ScalarProperty Name="room_price" ColumnName="room_price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="travel_agentModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="user_tz" ColumnName="user_tz" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="pasword" ColumnName="pasword" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="country">
+            <EntityTypeMapping TypeName="travel_agentModel.country">
+              <MappingFragment StoreEntitySet="country">
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="countryKey" ColumnName="countryKey" />
+                <ScalarProperty Name="countryDisplayName" ColumnName="countryDisplayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

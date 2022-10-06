@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="travel_agentModelStoreContainer" CdmEntityContainer="travel_agentEntities">
+    <EntitySetMapping Name="flights">
+      <EntityTypeMapping TypeName="travel_agentModel.flights">
+        <MappingFragment StoreEntitySet="flights">
+          <ScalarProperty Name="flight_code" ColumnName="flight_code" />
+          <ScalarProperty Name="flight_company" ColumnName="flight_company" />
+          <ScalarProperty Name="flight_date" ColumnName="flight_date" />
+          <ScalarProperty Name="flight_country_of_origin" ColumnName="flight_country_of_origin" />
+          <ScalarProperty Name="flight_destination_country" ColumnName="flight_destination_country" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="holiday_package">
+      <EntityTypeMapping TypeName="travel_agentModel.holiday_package">
+        <MappingFragment StoreEntitySet="holiday_package">
+          <ScalarProperty Name="package_code" ColumnName="package_code" />
+          <ScalarProperty Name="user_tz" ColumnName="user_tz" />
+          <ScalarProperty Name="hotel_code" ColumnName="hotel_code" />
+          <ScalarProperty Name="flight_enter_code" ColumnName="flight_enter_code" />
+          <ScalarProperty Name="flight_back_code" ColumnName="flight_back_code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hotels">
+      <EntityTypeMapping TypeName="travel_agentModel.hotels">
+        <MappingFragment StoreEntitySet="hotels">
+          <ScalarProperty Name="hotel_code" ColumnName="hotel_code" />
+          <ScalarProperty Name="hotel_name" ColumnName="hotel_name" />
+          <ScalarProperty Name="hotel_country" ColumnName="hotel_country" />
+          <ScalarProperty Name="hotel_city" ColumnName="hotel_city" />
+          <ScalarProperty Name="hotel_address" ColumnName="hotel_address" />
+          <ScalarProperty Name="hotel_number" ColumnName="hotel_number" />
+          <ScalarProperty Name="number_of_stars" ColumnName="number_of_stars" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="room_in_hotel">
+      <EntityTypeMapping TypeName="travel_agentModel.room_in_hotel">
+        <MappingFragment StoreEntitySet="room_in_hotel">
+          <ScalarProperty Name="room_number" ColumnName="room_number" />
+          <ScalarProperty Name="hotel_code" ColumnName="hotel_code" />
+          <ScalarProperty Name="number_of_beds" ColumnName="number_of_beds" />
+          <ScalarProperty Name="room_price" ColumnName="room_price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="travel_agentModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="user_tz" ColumnName="user_tz" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="pasword" ColumnName="pasword" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="country">
+      <EntityTypeMapping TypeName="travel_agentModel.country">
+        <MappingFragment StoreEntitySet="country">
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="countryKey" ColumnName="countryKey" />
+          <ScalarProperty Name="countryDisplayName" ColumnName="countryDisplayName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
